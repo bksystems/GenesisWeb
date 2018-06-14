@@ -2,7 +2,7 @@
 <html>
 <head>
    <?php
-   	$title_page = "Actividades en campo Génesis"; 
+   	$title_page = "Ubicación de sucursales"; 
    	include('..//template_plugins//pages_template_head.php');
    ?>
    <script type="text/javascript" src="../../content/js/canvas_maps_viewer.js"></script>

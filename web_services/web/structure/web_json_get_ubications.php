@@ -12,9 +12,9 @@
         $query = "";
 
         if($type_filter == 0){
-            $query = "SELECT os.id, os.cc, os.name, osu.Latitude, osu.Longitude FROM sys_structure_offices os JOIN sys_structure_ubications osu on osu.id_office = os.id where os.enabled = 1";
+            $query = "SELECT os.id, os.cc, os.name, os.type_office, osu.Latitude, osu.Longitude FROM sys_structure_offices os JOIN sys_structure_ubications osu on osu.id_office = os.id where os.enabled = 1";
         }else{
-            $query = "SELECT os.id, os.cc, os.name, osu.Latitude, osu.Longitude FROM sys_structure_offices os JOIN sys_structure_ubications osu on osu.id_office = os.id where os.type_office = '$type_filter' and os.enabled = 1 ";
+            $query = "SELECT os.id, os.cc, os.name, os.type_office, osu.Latitude, osu.Longitude FROM sys_structure_offices os JOIN sys_structure_ubications osu on osu.id_office = os.id where os.type_office = '$type_filter' and os.enabled = 1 ";
         }
 		$result = mysqli_query($connect, $query);
 		$json_result = array();

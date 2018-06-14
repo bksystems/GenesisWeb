@@ -11,7 +11,7 @@
 	<?php
  	 	include('elements//pages_template_menu.php');
   	?>
-
+	
 
 
 	<div class="container-fluid" style="padding-top:60px; padding-left: 20px; padding-right: 20px;">
