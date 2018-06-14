@@ -53,7 +53,7 @@
 					</div>
 			</div>
 		</div>
-		<div></div>
+	
 	</div>
 	<?php
 		  include('..//template_plugins//pages_template_footer.php');
