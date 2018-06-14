@@ -6,6 +6,7 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a class="nav-item nav-link" href="../indicators/index.php">Dashboard <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="../structures/map_viewer.php">Mapa <span class="sr-only">(current)</span></a>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Seguimiento Génesis
