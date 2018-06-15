@@ -24,11 +24,28 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-7">
                 <div class="card">
                     <div class="card-header">Mapa</div>
                     <div class="card-body">
                         <div style="height: 550px; width: 100%;" id="map_view"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-header">Listado de sucursales</div>
+                    <div class="card-body">
+                        <table id="table_sucursales" class="table table-hover table-striped" style="font-size: 11px;">
+                            <thead>
+                                <tr>
+                                    <th>Sucursal</th>
+                                    <th>Tipo</th>
+                                    <th>Inicio de operación</th>
+                                    <th>Cierre de operacion</th>
+                                </tr>
+                            </thead>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -48,7 +65,13 @@
 
     $(document).ready(function(){
         load_types_offices();
+        load_json_ubications(0);
+        $('#table_sucursales').DataTable({
+            
+        });
     });
+
+    
 
     $('#cb_type_offices').change(function(){
         var type_filter = this.value;

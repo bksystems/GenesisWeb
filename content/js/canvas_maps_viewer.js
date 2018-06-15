@@ -6,8 +6,8 @@ function initMap() {
 
    map = new google.maps.Map(document.getElementById('map_view'), {
         center: haightAshbury,
-        zoom: 4.8,
-        mapTypeId: 'terrain'
+        zoom: 4.9,
+        //mapTypeId: 'terrain'
     });
 
     map.addListener('click', function(){
@@ -21,13 +21,13 @@ function addMarker(location, type, name){
     var image =  "";
     if(type == 1){
         tipo_nombre = "Oficina de servicio";
-        image = "../../content/images/icons_maps/pointer_1.png"
+        image = "../../content/images/icons_maps/os_pin_1.png"
     }else if(type == 2){
         tipo_nombre = "Sucursal dentro de OS";
-        image = "../../content/images/icons_maps/pointer_2.png"
+        image = "../../content/images/icons_maps/os_pin_2.png"
     } else if(type == 3){
         tipo_nombre = "Sucursal bancaria";
-        image = "../../content/images/icons_maps/pointer_2.png"
+        image = "../../content/images/icons_maps/os_pin_2.png"
     }  
 
     var marker = new google.maps.Marker({

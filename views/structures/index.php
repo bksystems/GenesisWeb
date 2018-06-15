@@ -105,8 +105,8 @@
               }
             },
             ajax: {
-              url: '../../web_services/web/structure/web_json_get_directions.php',
-              dataSrc: 'data'
+                url: '../../web_services/web/structure/web_json_get_directions.php',
+                dataSrc: 'data'
               },
               columns: [
                 {data: 'id'},
