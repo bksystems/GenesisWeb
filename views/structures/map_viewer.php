@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">Mapa</div>
                     <div class="card-body">
@@ -32,7 +32,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-5">
+        </div>
+        <div class="row">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">Listado de sucursales</div>
                     <div class="card-body">
@@ -41,6 +43,7 @@
                                 <tr>
                                     <th>Sucursal</th>
                                     <th>Tipo</th>
+                                    <th>Estatus</th>
                                     <th>Inicio de operación</th>
                                     <th>Cierre de operacion</th>
                                 </tr>
@@ -49,6 +52,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         </div>
 
     </div>
@@ -67,7 +71,19 @@
         load_types_offices();
         load_json_ubications(0);
         $('#table_sucursales').DataTable({
-            
+            ajax:{
+                url: '../../web_services/web/structure/web_json_get_ubications.php',
+                data: {'type_filter': 0, 'operation_date': '2018-06-15'},
+                type: 'POST',
+                dataSrc: 'data'
+            },
+            columns:[
+                {data: 'name'},
+                {data: 'type'},
+                {data: 'status_name'},
+                {data: 'open_operation'},
+                {data: 'close_operation'}
+            ]
         });
     });
 

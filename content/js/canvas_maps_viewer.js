@@ -16,7 +16,7 @@ function initMap() {
     
 }
 
-function addMarker(location, type, name){
+function addMarker(location, type, name, status, open_operation, close_operation){
     var tipo_nombre = "";
     var image =  "";
     if(type == 1){
@@ -24,10 +24,18 @@ function addMarker(location, type, name){
         image = "../../content/images/icons_maps/os_pin_1.png"
     }else if(type == 2){
         tipo_nombre = "Sucursal dentro de OS";
-        image = "../../content/images/icons_maps/os_pin_2.png"
+        if(status == 0){
+            image = "../../content/images/icons_maps/os_pin_2.png"
+        }else{
+            image = "../../content/images/icons_maps/os_pin_3.png"
+        }
     } else if(type == 3){
         tipo_nombre = "Sucursal bancaria";
-        image = "../../content/images/icons_maps/os_pin_2.png"
+        if(status == 0){
+            image = "../../content/images/icons_maps/os_pin_2.png"
+        }else{
+            image = "../../content/images/icons_maps/os_pin_3.png"
+        }
     }  
 
     var marker = new google.maps.Marker({
@@ -39,7 +47,8 @@ function addMarker(location, type, name){
         animation: google.maps.Animation.DROP 
     });
    
-    var contente_string = '<div class="card"><div class="card-header"><strong>' + tipo_nombre + '</strong></div><div class="card-body">'+name+'</div></div>';
+    var contente_string = '<div class="card"><div class="card-header"><strong>' + tipo_nombre 
+                        + '</strong></div><div class="card-body">Nombre: '+ name+ '<p></p>D/H Apertura: ' + open_operation + '<p></p>D/H Apertura: ' + close_operation + '</div></div>';
     var infoWindow = new google.maps.InfoWindow({
         content: contente_string
     });
@@ -75,14 +84,15 @@ function load_json_ubications(type_filter){
         dataType: 'json',
         url: '../../web_services/web/structure/web_json_get_ubications.php',
         data:{
-            'type_filter': type_filter
+            'type_filter': type_filter,
+            'operation_date': '2018-06-15'
         },
         success: function(data){
         if(data.result = true){
             deleteMarkers();
             $.each(data.data, function(index, value){
                 //PrintMarker(value.Latitude,value.Longitude,value.name);
-                addMarker(new google.maps.LatLng(value.Latitude, value.Longitude), value.type_office, value.name);
+                addMarker(new google.maps.LatLng(value.Latitude, value.Longitude), value.type_office, value.name, value.status, value.open_operation, value.close_operation);
             });
 
         }else{
