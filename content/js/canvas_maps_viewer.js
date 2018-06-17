@@ -48,7 +48,8 @@ function addMarker(location, type, name, status, open_operation, close_operation
     });
    
     var contente_string = '<div class="card"><div class="card-header"><strong>' + tipo_nombre 
-                        + '</strong></div><div class="card-body">Nombre: '+ name+ '<p></p>D/H Apertura: ' + open_operation + '<p></p>D/H Apertura: ' + close_operation + '</div></div>';
+                        + '</strong></div><div class="card-body">Nombre: '+ name+ '<p></p>D/H Apertura: ' + open_operation 
+                        + '<p></p>D/H Apertura: ' + close_operation + '</div></div>';
     var infoWindow = new google.maps.InfoWindow({
         content: contente_string
     });

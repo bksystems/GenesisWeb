@@ -43,7 +43,7 @@
                                 <tr>
                                     <th>Sucursal</th>
                                     <th>Tipo</th>
-                                    <th>Estatus</th>
+                                    <th>Estado</th>
                                     <th>Inicio de operación</th>
                                     <th>Cierre de operacion</th>
                                 </tr>
@@ -52,7 +52,6 @@
                     </div>
                 </div>
             </div>
-        </div>
         </div>
 
     </div>
@@ -73,9 +72,9 @@
         $('#table_sucursales').DataTable({
             ajax:{
                 url: '../../web_services/web/structure/web_json_get_ubications.php',
-                data: {'type_filter': 0, 'operation_date': '2018-06-15'},
-                type: 'POST',
-                dataSrc: 'data'
+                dataSrc: 'data',
+                data:{'type_filter': 0, 'operation_date': '2018-06-15'},
+                type: 'POST'
             },
             columns:[
                 {data: 'name'},
@@ -83,6 +82,7 @@
                 {data: 'status_name'},
                 {data: 'open_operation'},
                 {data: 'close_operation'}
+
             ]
         });
     });
