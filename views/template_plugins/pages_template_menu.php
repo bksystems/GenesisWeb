@@ -13,7 +13,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="../activity_teams/index.php">Actividades en campo</a>
-          <a class="dropdown-item" href="#">Cartas resguardo</a>
+          <a class="dropdown-item" href="../employees/shelter_letters.php">Cartas resguardo</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Matríz de operaciones</a>
           <a class="dropdown-item" href="#">Matríz de ventas</a>

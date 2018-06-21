@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,18 +60,15 @@
 				<div class="form-group">
 				<label></label>
 					<div class="text-right">
-						<button id="btn_update_indicators" type="submit" class="btn btn-primary btn-sm">Generar graficas</button>
+						<button id="btn_update_indicators" hidden type="submit" class="btn btn-primary btn-sm">Generar graficas</button>
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- Componente donde se encuentran los graficos-->
 		<div>
-			<div class="row">
-				<div class="col-md-4"><h6 id="title_structure_indicators"></h6></div>
-			</div>
 			<div class="card">
-				<div class="card-header"><h5>Indicadores al momento</h5></div>
+				<div class="card-header"><h6 id="title_search_now"></h6></div>
 				<div class="card-body">
 					<div class="row">
 						<div class="col-md-3">
@@ -92,7 +88,7 @@
 			</div>
 			<p></p>
 			<div class="card">
-				<div class="card-header"><h5>Indicadores - historico</h5></div>
+				<div class="card-header"><h6 id="title_search_historic"></h6></div>
 				<div class="card-body">
 					<div class="row">
 						<div class="col-md-4">
@@ -105,6 +101,7 @@
 							<canvas id="div_canvas_retrabajos"></canvas>
 						</div>
 					</div>		
+					<p><hr></p>
 					<div class="row">
 						<div class="col-md-4">
 							<canvas id="div_canvas_prospecion"></canvas>
@@ -132,6 +129,43 @@
 
 	var type_report_index = 0;
 
+	function event_update_indicator(){
+		var year = $( "#cb_year option:selected" ).val();
+			var dir_id = $( "#cb_direcction option:selected" ).val();
+			var sub_id = $( "#cb_subdirection option:selected" ).val();
+			var reg_id = $( "#cb_region option:selected" ).val();
+			var os_id = $( "#cb_office option:selected" ).val();
+			if(year > 0){
+					switch(type_report_index){
+						case 0:
+							update_indicators(year, type_report_index, 0)
+							update_search_indicators("Nacional - Año: ", year);
+							break;
+						case 1:
+							update_indicators(year, type_report_index, dir_id)
+							update_search_indicators( $( "#cb_direcction option:selected" ).text(), year);
+							break;
+						case 2:
+							update_indicators(year, type_report_index, sub_id)
+							update_search_indicators( $( "#cb_direcction option:selected" ).text() + " - " +$( "#cb_subdirection option:selected" ).text(),  year);
+							break;
+						case 3:
+							update_indicators(year, type_report_index, reg_id)
+							update_search_indicators( $( "#cb_direcction option:selected" ).text() + " - " +$( "#cb_subdirection option:selected" ).text() + " - " +$( "#cb_region option:selected" ).text(),  year);
+							break;
+						case 4:
+							update_indicators(year, type_report_index, os_id)
+							update_search_indicators( $( "#cb_direcction option:selected" ).text() + " - " +$( "#cb_subdirection option:selected" ).text() + " - " + $( "#cb_region option:selected" ).text() + " - " + $( "#cb_office option:selected" ).text(),  year);
+							break;
+						default:
+							update_indicators(year, 0, 0)
+							break;
+					}		
+			}else{
+				alert('Por favor selecione el año de información');
+			}
+	}
+
 	$(document).ready(function(){
 		$('#cb_subdirection').html("");
 		$("#cb_subdirection").prop('disabled', 'disabled');
@@ -143,46 +177,11 @@
      	load_directions();
 		load_years();
 		initialize_charts();
-		update_indicators(2018, 0, 0);
 		
 		type_report_index = 0;
 
 		$('#btn_update_indicators').click(function(){
-			var year = $( "#cb_year option:selected" ).val();
-			var dir_id = $( "#cb_direcction option:selected" ).val();
-			var sub_id = $( "#cb_subdirection option:selected" ).val();
-			var reg_id = $( "#cb_region option:selected" ).val();
-			var os_id = $( "#cb_office option:selected" ).val();
-			if(year > 0){
-					switch(type_report_index){
-						case 0:
-							update_indicators(year, type_report_index, 0)
-							update_search_indicators("Nacional - Año: " + year);
-							break;
-						case 1:
-							update_indicators(year, type_report_index, dir_id)
-							update_search_indicators( $( "#cb_direcction option:selected" ).text() + " - " + year);
-							break;
-						case 2:
-							update_indicators(year, type_report_index, sub_id)
-							update_search_indicators( $( "#cb_direcction option:selected" ).text() + " - " +$( "#cb_subdirection option:selected" ).text() + " - " + year);
-							break;
-						case 3:
-							update_indicators(year, type_report_index, reg_id)
-							update_search_indicators( $( "#cb_direcction option:selected" ).text() + " - " +$( "#cb_subdirection option:selected" ).text() + " - " +$( "#cb_region option:selected" ).text() + " - " + year);
-							break;
-						case 4:
-							update_indicators(year, type_report_index, os_id)
-							update_search_indicators( $( "#cb_direcction option:selected" ).text() + " - " +$( "#cb_subdirection option:selected" ).text() + " - " + $( "#cb_region option:selected" ).text() + " - " + $( "#cb_office option:selected" ).text() + " - " + year);
-							break;
-						default:
-							update_indicators(year, 0, 0)
-							break;
-					}		
-			}else{
-				alert('Por favor selecione el año de información');
-			}
-			update_search_indicators();
+			event_update_indicator();
 		});
 
 		$('#cb_direcction').change(function(){
@@ -199,6 +198,7 @@
 				$('#cb_region').prop('disabled', 'disabled');
 				$('#cb_office').prop('disabled', 'disabled');
 			}
+			event_update_indicator();
 		});
 
 		$('#cb_subdirection').change(function(){
@@ -213,6 +213,7 @@
 				$('#cb_office').html("");
 				$('#cb_office').prop('disabled', 'disabled');
 			}
+			event_update_indicator();
 		});
 
 		$('#cb_region').change(function(){
@@ -225,6 +226,7 @@
 				$('#cb_office').html("");
 				$('#cb_office').prop('disabled', 'disabled');
 			}
+			event_update_indicator();
 		});
 		
 		$('#cb_office').change(function(){
@@ -234,6 +236,11 @@
 			}else{
 				type_report_index = 3;
 			}
+			event_update_indicator();
+		});
+
+		$('#cb_year').change(function(){
+			event_update_indicator();
 		});
 
 	});

@@ -45,7 +45,6 @@ function initialize_charts(){
             labels:['Dispositivo', 'Papel']
         },
         options:{
-            cutoutPercentage: 50,
             animation: {
                 animateScale: true,
                 animateRotate: true
@@ -54,6 +53,10 @@ function initialize_charts(){
                 display: true,
                 text: 'SOLICITANTES (ACTUAL)'
             },
+             // String - Template string for single tooltips
+            tooltipTemplate: "<%if (label){%><%=label %>: <%}%><%= value + ' %' %>",
+            // String - Template string for multiple tooltips
+            multiTooltipTemplate: "<%= value + ' %' %>",
         }
     });
 
@@ -353,6 +356,10 @@ function initialize_charts(){
             cutoutPercentage: true
         }
     });
+
+    var year = (new Date).getFullYear();  
+    update_indicators(year, 0, 0);
+    update_search_indicators("Nacional ", year);
     
 }
 
@@ -380,6 +387,11 @@ function update_indicators(year_consult, type_report, index_consult){
     var element_csc_reworks_rework = [];
 
     var element_now_solicitantes_data = [];
+    var element_now_solicitudes_data = [];
+    var element_now_reworks_data = [];
+    var element_now_csc_reworks_data = [];
+
+
     $.ajax({
       type: 'POST',
       dataType: 'json',
@@ -419,9 +431,34 @@ function update_indicators(year_consult, type_report, index_consult){
             });
 
             $.each(data.data.now_solicitantes, function(index, value){
+                chart_now_solicitantes.options.title.text = 'SOLICITANTES - ACTUAL (' + value.Month +' - ' + value.year+ ')';
                 element_now_solicitantes_data[0] = value.DM;
                 element_now_solicitantes_data[1] = value.Papel;
             });
+
+            $.each(data.data.now_solicitudes, function(index, value){
+                chart_now_solicitudes.options.title.text = 'SOLICITUDES - ACTUAL (' + value.Month +' - ' + value.year+ ')';
+                element_now_solicitudes_data[0] = value.DM;
+                element_now_solicitudes_data[1] = value.DM_OS;
+                element_now_solicitudes_data[2] = value.Papel;
+            });
+
+            $.each(data.data.now_reworks, function(index, value){
+                chart_now_retrabajos.options.title.text = 'RETRABAJOS - ACTUAL (' + value.Month +' - ' + value.year+ ')';
+                element_now_reworks_data[1] = value.retrabajos;
+                element_now_reworks_data[0] = value.aceptados;
+            });
+
+            element_now_reworks_data
+
+            $.each(data.data.now_csc_reworks, function(index, value){
+                chart_now_atencion_csc.options.title.text = 'CSS NIVEL RETRABAJOS - ACTUAL (' + value.Month +' - ' + value.year+ ')';
+                element_now_csc_reworks_data[0] = value.Aprobados;
+                element_now_csc_reworks_data[1] = value.Incidencia;
+                element_now_csc_reworks_data[2] = value.Recuperaciones;
+            });
+
+            
 
           chart_solicitantes.data.labels = element_solicitantes_labels;
           chart_solicitantes.data.datasets[0].data = element_solicitantes_dispositivo;
@@ -442,12 +479,18 @@ function update_indicators(year_consult, type_report, index_consult){
           chart_csc_reworks.data.datasets[2].data = element_csc_reworks_incident;
 
           chart_now_solicitantes.data.datasets[0].data = element_now_solicitantes_data;
-
+          chart_now_solicitudes.data.datasets[0].data = element_now_solicitudes_data;
+          chart_now_retrabajos.data.datasets[0].data = element_now_reworks_data;
+          chart_now_atencion_csc.data.datasets[0].data = element_now_csc_reworks_data;
+          
           chart_solicitantes.update();
           chart_solicitudes.update();
           chart_retrabajos.update();
           chart_csc_reworks.update();
           chart_now_solicitantes.update();
+          chart_now_solicitudes.update();
+          chart_now_atencion_csc.update();
+          chart_now_retrabajos.update();
   
         }else{
           alert('Error');
@@ -458,3 +501,10 @@ function update_indicators(year_consult, type_report, index_consult){
       }
     });
 }
+
+function update_search_indicators($update_text, $year){
+    $text_now = 'Indicadores al momento: ' + $update_text;
+    $text_historic = 'Indicadores (Historico): ' + $update_text + ' - ' +  $year;
+    $('#title_search_now').html($text_now);
+    $('#title_search_historic').html($text_historic);
+  }
