@@ -1,171 +1,460 @@
-var canvas_solicitantes = null;
-var canvas_prospectos = null;
-var canvas_solicitudes = null;
-var canvas_retrabajos = null;
+var div_canvas_solicitantes = null;
 var chart_solicitantes = null;
-var chatr_prospectos = null;
+
+var div_canvas_solicitudes = null;
 var chart_solicitudes = null;
+
+var div_canvas_retrabajos = null;
 var chart_retrabajos = null;
 
-var canvas_historic_solicitantes = null;
-var chart_historic_solicitantes = null;
+var div_canvas_prospecion = null;
+var chart_prospeccion = null;
 
+var div_canvas_css_reworks = null;
+var chart_csc_reworks = null;
 
-function init_charts_now(){
-    canvas_solicitantes = document.getElementById('canvas_ctx_solicitantes').getContext('2d');
-    chart_solicitantes = new Chart(canvas_solicitantes,{
+var now_solicitantes = null;
+var chart_now_solicitantes = null;
+
+var now_solicitudes = null;
+var chart_now_solicitudes = null;
+
+var now_retrabajosc = null;
+var chart_now_retrabajos = null;
+
+var now_atencion_csc = null;
+var chart_now_atencion_csc = null;
+
+function initialize_charts(){
+
+    now_solicitantes = document.getElementById('now_solicitantes').getContext('2d');
+    chart_now_solicitantes = new Chart(now_solicitantes,{
         type: 'doughnut',
         data:{
-            labels:['Dispositivo', 'Papel'],
             datasets:[{
-                label: 'Solicitantes',
-                backgroundColor:[
-                    'rgba(51, 250, 250, 0.2)',
-                    'rgba(54, 162, 235, 0.2)'
-                ],
+                data:[50,50],
                 borderColor: [
-                    'rgb(40, 244, 244, 0.2)',
-                    'rgba(49, 166, 229, 0.2)'
+                    'rgba(0,204,102,1)', 
+                    'rgba(255,102,102,1)'
                 ],
-                data:[50,50]
-            }]
+                backgroundColor: [
+                    'rgba(0,204,102,1)', 
+                    'rgba(255,102,102,1)'
+                ],
+            }],
+            labels:['Dispositivo', 'Papel']
         },
         options:{
-            legend:{
-                fontColor:'black'
+            cutoutPercentage: 50,
+            animation: {
+                animateScale: true,
+                animateRotate: true
             },
             title: {
                 display: true,
-                text: 'Solicitantes'
-            }
+                text: 'SOLICITANTES (ACTUAL)'
+            },
         }
     });
 
-    canvas_prospectos = document.getElementById('canvas_ctx_prospectos').getContext('2d');
-    chatr_prospectos = new Chart(canvas_prospectos,{
+    now_solicitudes = document.getElementById('now_solicitudes').getContext('2d');
+    chart_now_solicitudes = new Chart(now_solicitudes,{
         type: 'doughnut',
         data:{
-            labels:['% Conversion', '% No exitoso'],
             datasets:[{
-                label: 'Solicitantes',
-                backgroundColor:[
-                    'rgba(51, 250, 250, 0.2)',
-                    'rgba(54, 162, 235, 0.2)'
-                ],
+                data:[50,30,20],
                 borderColor: [
-                    'rgb(40, 244, 244, 0.2)',
-                    'rgba(49, 166, 229, 0.2)'
+                    'rgba(0,204,102,1)', 
+                    'rgba(255,178,102,1)',
+                    'rgba(255,102,102,1)'
                 ],
-                data:[50,50]
-            }]
+                backgroundColor: [
+                    'rgba(0,204,102,1)',
+                    'rgba(255,178,102,1)', 
+                    'rgba(255,102,102,1)'
+                ],
+            }],
+            labels:['Dispositivo', 'Hibrido', 'Papel']
         },
         options:{
-            legend:{
-                fontColor:'black'
+            cutoutPercentage: 50,
+            animation: {
+                animateScale: true,
+                animateRotate: true
             },
             title: {
                 display: true,
-                text: 'Prospectos'
-            }
+                text: 'SOLICITUDES (ACTUAL)'
+            },
         }
     });
 
-    canvas_solicitudes = document.getElementById('canvas_ctx_solicitudes').getContext('2d');
-    chart_solicitudes = new Chart(canvas_solicitudes,{
+    now_retrabajos = document.getElementById('now_retrabajos').getContext('2d');
+    chart_now_retrabajos = new Chart(now_retrabajos,{
         type: 'doughnut',
         data:{
-            labels:['Dispositivo', 'Hibrido', 'Papel'],
             datasets:[{
-                label: 'Solicitantes',
-                backgroundColor:[
-                    'rgba(51, 250, 250, 0.2)',
-                    'rgba(244, 208, 163, 02)',
-                    'rgba(54, 162, 235, 0.2)'
-                ],
+                data:[50,50],
                 borderColor: [
-                    'rgb(40, 244, 244, 0.2)',
-                    'rgba(239, 202, 150, 0.2)',
-                    'rgba(49, 166, 229, 0.2)'
+                    'rgba(0,204,102,1)', 
+                    'rgba(255,102,102,1)'
                 ],
-                data:[30,50, 20]
-            }]
+                backgroundColor: [
+                    'rgba(0,204,102,1)', 
+                    'rgba(255,102,102,1)'
+                ],
+            }],
+            labels:['Aceptados', 'Retrabajo']
         },
         options:{
-            legend:{
-                fontColor:'black'
+            cutoutPercentage: 50,
+            animation: {
+                animateScale: true,
+                animateRotate: true
             },
             title: {
                 display: true,
-                text: 'Solicitudes'
-            }
+                text: 'RETABAJOS (ACTUAL)'
+            },
         }
     });
 
-    canvas_retrabajos = document.getElementById('canvas_ctx_retrabajos').getContext('2d');
-    chart_retrabajos = new Chart(canvas_retrabajos,{
+    now_atencion_csc = document.getElementById('now_atencion_csc').getContext('2d');
+    chart_now_atencion_csc = new Chart(now_atencion_csc,{
         type: 'doughnut',
         data:{
-            labels:['% Incremento Retrabajos', 'Vacio'],
             datasets:[{
-                label: 'Solicitantes',
-                backgroundColor:[
-                    'rgba(51, 250, 250, 0.2)',
-                    'rgba(54, 162, 235, 0.2)'
-                ],
+                data:[50,30,20],
                 borderColor: [
-                    'rgb(40, 244, 244, 0.2)',
-                    'rgba(49, 166, 229, 0.2)'
+                    'rgba(0,204,102,1)', 
+                    'rgba(255,178,102,1)',
+                    'rgba(255,102,102,1)'
                 ],
-                data:[30,70]
-            }]
+                backgroundColor: [
+                    'rgba(0,204,102,1)',
+                    'rgba(255,178,102,1)', 
+                    'rgba(255,102,102,1)'
+                ],
+            }],
+            labels:['Aprobados', 'Incidencia', 'Rechazados']
         },
         options:{
-            legend:{
-                fontColor:'black'
+            cutoutPercentage: 50,
+            animation: {
+                animateScale: true,
+                animateRotate: true
             },
             title: {
                 display: true,
-                text: 'Retrabajos'
-            }
+                text: 'NIVEL DE RECHAZOS (ACTUAL)'
+            },
         }
     });
 
-
-}
-
-function inut_charts_historic(){
-    canvas_historic_solicitantes = document.getElementById('canvas_historic_chart').getContext('2d');
-    chart_historic_solicitantes = new Chart(canvas_historic_solicitantes, {
+    div_canvas_solicitantes = document.getElementById('div_canvas_solicitantes').getContext('2d');
+    chart_solicitantes = new Chart(div_canvas_solicitantes, {
         type: 'line',
         data: {
-            labels: ['1', '2', '3', '4', '5'],
-            datasets: [{
-            label: 'A',
-            yAxisID: 'A',
-            data: [100, 96, 84, 76, 69]
-            }, 
-            {
-                label: 'B',
-                yAxisID: 'B',
-                data: [1, 1, 1, 1, 0]
-            }]
+            datasets:[{
+                label: 'Papel',
+                type: 'line',
+                borderWidth: 1,
+                borderColor: 'rgba(255,102,102,1)',
+                backgroundColor: 'rgba(255,102,102,1)',
+                fill: false
+            },{
+                label: 'Dispositivo',
+                type: 'line',
+                borderWidth: 1,
+                borderColor: 'rgba(0,204,102,1)',
+                backgroundColor: 'rgba(0,204,102,1)',
+                fill: false
+            }],
         },
         options: {
             scales: {
-            yAxes: [{
-                id: 'A',
-                type: 'linear',
-                position: 'left',
-            }, {
-                id: 'B',
-                type: 'linear',
-                position: 'right',
-                ticks: {
-                max: 1,
-                min: 0
-                }
-            }]
-            }
+                yAxes: [{
+                    ticks: {
+                        min: 0,
+                        max: 100
+                    }
+                }]
+            },
+            title: {
+                display: true,
+                text: 'SOLICITANTES'
+            },
+            tooltipTemplate: "<%if (label){%><%=label %>: <%}%><%= value + ' %' %>",
+            multiTooltipTemplate: "<%= value + ' %' %>",
+            cutoutPercentage: true
         }
-        });
+    });
+
+    div_canvas_solicitudes = document.getElementById('div_canvas_solicitudes').getContext('2d');
+    chart_solicitudes = new Chart(div_canvas_solicitudes, {
+        type: 'line',
+        label: 'Solicitudes',
+        data:{
+            datasets:[{
+                label: 'Papel',
+                type: 'line',
+                borderWidth: 1,
+                borderColor: 'rgba(255,102,102,1)',
+                backgroundColor: 'rgba(255,102,102,1)',
+                fill: false
+            },{
+                label: 'Hibrido',
+                type: 'line',
+                borderWidth: 1,
+                borderColor: 'rgba(255,178,102,1)',
+                backgroundColor: 'rgba(255,178,102,1)',
+                fill: false
+            },{
+                label: 'DM',
+                type: 'line',
+                borderWidth: 1,
+                borderColor: 'rgba(0,204,102,1)',
+                backgroundColor: 'rgba(0,204,102,1)',
+                fill: false
+            }],
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        min: 0,
+                        max: 100
+                    }
+                }]
+            },
+            title: {
+                display: true,
+                text: 'SOLICITUDES'
+            },
+        }
+    });
+
+    div_canvas_retrabajos = document.getElementById('div_canvas_retrabajos').getContext('2d');
+    chart_retrabajos = new Chart(div_canvas_retrabajos, {
+        type: 'line',
+        label: 'Solicitantes', 
+        data: {
+            datasets:[{
+                label: 'Ideal',
+                type: 'line',
+                borderWidth: 1,
+                borderColor: 'rgba(255,178,102,1)',
+                backgroundColor: 'rgba(255,178,102,1)',
+                fill: false
+            },{
+                label: 'Retrabajos',
+                type: 'line',
+                borderWidth: 1,
+                borderColor: 'rgba(0,204,102,1)',
+                backgroundColor: 'rgba(0,204,102,1)',
+                fill: false
+            }],
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        min: 0.5,
+                        max: 2.2
+                    }
+                }]
+            },
+            title: {
+                display: true,
+                text: 'RETRABAJOS'
+            },
+        }
+    });
+
+    div_canvas_prospecion = document.getElementById('div_canvas_prospecion').getContext('2d');
+    chart_prospeccion = new Chart(div_canvas_prospecion, {
+        type: 'line',
+        data: {
+            datasets:[{
+                label: 'Prospectos',
+                type: 'line',
+                borderWidth: 1,
+                borderColor: 'rgba(255,102,102,1)',
+                backgroundColor: 'rgba(255,102,102,1)',
+                fill: false
+            },{
+                label: 'Clientes',
+                type: 'line',
+                borderWidth: 1,
+                borderColor: 'rgba(0,204,102,1)',
+                backgroundColor: 'rgba(0,204,102,1)',
+                fill: false
+            }],
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        min: 0,
+                        max: 100
+                    }
+                }]
+            },
+            title: {
+                display: true,
+                text: 'PROSPECCIÓN'
+            },
+            tooltipTemplate: "<%if (label){%><%=label %>: <%}%><%= value + ' %' %>",
+            multiTooltipTemplate: "<%= value + ' %' %>",
+            cutoutPercentage: true
+        }
+    });
+
+    div_canvas_csc_reworks = document.getElementById('div_canvas_csc_reworks').getContext('2d');
+    chart_csc_reworks = new Chart(div_canvas_csc_reworks, {
+        type: 'line',
+        data: {
+            datasets:[{
+                label: 'Aceptados',
+                type: 'line',
+                borderWidth: 1,
+                borderColor: 'rgba(0,204,102,1)',
+                backgroundColor: 'rgba(0,204,102,1)',
+                fill: false
+            },{
+                label: 'Rechazados',
+                type: 'line',
+                borderWidth: 1,
+                borderColor: 'rgba(255,102,102,1)',
+                backgroundColor: 'rgba(255,102,102,1)',
+                fill: false
+            },{
+                label: 'Incidentes',
+                type: 'line',
+                borderWidth: 1,
+                borderColor: 'rgba(255,178,102,1)',
+                backgroundColor: 'rgba(255,178,102,1)',
+                fill: false
+            }],
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        min: 0,
+                        max: 100
+                    }
+                }]
+            },
+            title: {
+                display: true,
+                text: 'NIVEL RETRABAJOS'
+            },
+            cutoutPercentage: true
+        }
+    });
+    
+}
+
+function update_indicators(year_consult, type_report, index_consult){
+    var element_solicitantes_labels = [];
+    var element_solicitantes_dispositivo = [];
+    var element_solicitantes_papel = [];
+
+    var element_solicitudes_labels = [];
+    var element_solicitudes_DM = [];
+    var element_solicitudes_Hibridos = [];
+    var element_solicitudes_Papel = [];
+
+    var element_retrabajos_labels = [];
+    var element_retrabajos_ideal = [];
+    var element_retrabajos_retrabajos = [];
+
+    var element_prospeccion_labels = [];
+    var element_prospeccion_prospectos = [];
+    var element_prospeccion_clientes = [];
+
+    var element_csc_reworks_labels = [];
+    var element_csc_reworks_accept = [];
+    var element_csc_reworks_incident = [];
+    var element_csc_reworks_rework = [];
+
+    var element_now_solicitantes_data = [];
+    $.ajax({
+      type: 'POST',
+      dataType: 'json',
+      data:{
+        'year': year_consult,
+        'type_index': type_report,
+        'index_consult': index_consult
+      },
+      url: '../../web_services/web/indicators/web_get_indicators_json.php',
+      success: function(data){
+        if(data.result = true){
+    
+            $.each(data.data.applicants, function(index, value){
+                element_solicitantes_labels[index] =  value.Month; 
+                element_solicitantes_dispositivo[index] = value.DM;
+                element_solicitantes_papel[index] = value.Papel;
+            });
+
+            $.each(data.data.requests, function(index, value){
+                element_solicitudes_labels[index] = value.Month;
+                element_solicitudes_DM[index] = value.DM ;
+                element_solicitudes_Hibridos[index] = value.DM_OS;
+                element_solicitudes_Papel[index] = value.Papel;
+            });
+
+            $.each(data.data.reworks, function(index, value){
+                element_retrabajos_labels[index] = value.Month;
+                element_retrabajos_ideal[index] = 1.2;
+                element_retrabajos_retrabajos[index]= value.value;
+            });
+
+            $.each(data.data.csc_reworks, function(index, value){
+                element_csc_reworks_labels[index] = value.Month;
+                element_csc_reworks_accept[index] = value.Aprobados;
+                element_csc_reworks_incident[index] = value.Incidencia;
+                element_csc_reworks_rework[index] = value.Recuperaciones;
+            });
+
+            $.each(data.data.now_solicitantes, function(index, value){
+                element_now_solicitantes_data[0] = value.DM;
+                element_now_solicitantes_data[1] = value.Papel;
+            });
+
+          chart_solicitantes.data.labels = element_solicitantes_labels;
+          chart_solicitantes.data.datasets[0].data = element_solicitantes_dispositivo;
+          chart_solicitantes.data.datasets[1].data = element_solicitantes_papel;
+
+          chart_solicitudes.data.labels = element_solicitudes_labels;
+          chart_solicitudes.data.datasets[0].data = element_solicitudes_Papel;
+          chart_solicitudes.data.datasets[1].data = element_solicitudes_Hibridos;
+          chart_solicitudes.data.datasets[2].data = element_solicitudes_DM;
+
+          chart_retrabajos.data.labels = element_retrabajos_labels;
+          chart_retrabajos.data.datasets[0].data = element_retrabajos_ideal;
+          chart_retrabajos.data.datasets[1].data = element_retrabajos_retrabajos;
+
+          chart_csc_reworks.data.labels = element_csc_reworks_labels;
+          chart_csc_reworks.data.datasets[0].data = element_csc_reworks_accept;
+          chart_csc_reworks.data.datasets[1].data = element_csc_reworks_rework;
+          chart_csc_reworks.data.datasets[2].data = element_csc_reworks_incident;
+
+          chart_now_solicitantes.data.datasets[0].data = element_now_solicitantes_data;
+
+          chart_solicitantes.update();
+          chart_solicitudes.update();
+          chart_retrabajos.update();
+          chart_csc_reworks.update();
+          chart_now_solicitantes.update();
+  
+        }else{
+          alert('Error');
+        }
+      },
+      error:function(data){
+        alert(data);
+      }
+    });
 }

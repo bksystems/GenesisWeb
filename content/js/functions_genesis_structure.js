@@ -174,7 +174,9 @@ function init_indicators(){
       xkey: 'y',
       ykeys: ['a', 'z', 'x'],
       labels: ['Prospectos', 'DM', 'Papel'],
-      xLabelAngle: 35,        
+      xLabelAngle: 35,   
+      resize: true,
+      grid: true   
   });
 
   chart_solicitudes = Morris.Bar({
@@ -186,6 +188,7 @@ function init_indicators(){
       ykeys: ['a', 'z', 'x'],
       labels: ['DM', 'Hibridos', 'Papel'],
       xLabelAngle: 35,
+      resize: true
   });
 
   chart_retrabajos = Morris.Line({
@@ -194,16 +197,17 @@ function init_indicators(){
       xkey: 'year',
       ykeys: ['value'],
       labels: ['Retrabajos'],
-      xLabels: ['month']
+      xLabels: ['month'],
+      resize: true
   });
 
   Morris.Donut({
       element: 'graph_renovaciones',
       data: [
-      {value: 70, label: 'foo', formatted: 'at least 70%' },
-      {value: 15, label: 'bar', formatted: 'approx. 15%' },
-      {value: 10, label: 'baz', formatted: 'approx. 10%' },
-      {value: 5, label: 'A really really long label', formatted: 'at most 5%' }
+        {value: 70, label: 'foo', formatted: 'at least 70%' },
+        {value: 15, label: 'bar', formatted: 'approx. 15%' },
+        {value: 10, label: 'baz', formatted: 'approx. 10%' },
+        {value: 5, label: 'A really really long label', formatted: 'at most 5%' }
       ],
       formatter: function (x, data) { return data.formatted; }
     });

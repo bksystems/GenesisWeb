@@ -17,7 +17,7 @@
 	<div class="container-fluid">
 		<!-- Componente de estructura-->
 		<div class="row">
-			<div class="col-md-2">
+			<div class="col-sm-2">
 				<div class="form-group">
 					<label for="cb_direcction">Dirección</label>
 					<select id="cb_direcction" class="form-control form-control-sm">
@@ -25,7 +25,7 @@
 					</select>
 				</div>
 			</div>
-			<div class="col-md-2">
+			<div class="col-sm-2">
 				<div class="form-group">
 					<label for="cb_subdirection">Subdirección</label>
 					<select id="cb_subdirection" class="form-control form-control-sm">
@@ -33,7 +33,7 @@
 					</select>
 				</div>
 			</div>
-			<div class="col-md-2">
+			<div class="col-sm-2">
 				<div class="form-group">
 					<label for="cb_region">Región</label>
 					<select id="cb_region" class="form-control form-control-sm">
@@ -41,7 +41,7 @@
 					</select>
 				</div>
 			</div>
-			<div class="col-md-2">
+			<div class="col-sm-2">
 				<div class="form-group">
 					<label for="cb_office">Oficina</label>
 					<select id="cb_office" class="form-control form-control-sm">
@@ -49,7 +49,7 @@
 					</select>
 				</div>
 			</div>
-			<div class="col-md-2">
+			<div class="col-sm-2">
 				<div class="form-group">
 					<label for="cb_year">Año</label>
 					<select id="cb_year" class="form-control form-control-sm">
@@ -72,29 +72,48 @@
 				<div class="col-md-4"><h6 id="title_structure_indicators"></h6></div>
 			</div>
 
-			<div class="row" id="new_indicators">
-				<div class="col-md-3">
-					<canvas id="canvas_ctx_solicitantes" style="height:90px;"></canvas>
+
+			<div class="row">
+					<div class="col-md-6">
+						<div class="card">
+							<h6 class="card-header">Solicitantes</h6>
+							<div class="card-body">
+								<div id="graph_solicitantes" style="height: 200px;"></div>
+							</div>
+						</div>
 				</div>
-				<div class="col-md-3">
-					<canvas id="canvas_ctx_prospectos" style="height:90px"></canvas>
+				<div class="col-md-6">
+					<div class="card">
+						<h6 class="card-header">Retrabajos</h6>
+						<div class="card-body">
+							<div id="graph_retrabajos" style="height: 200px;"></div>
+						</div>
+					</div>
 				</div>
-				<div class="col-md-3">
-					<canvas id="canvas_ctx_solicitudes" style="height:90px"></canvas>
+			</div>
+			<p></p>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="card">
+						<h6 class="card-header">Solicitudes</h6>
+						<div class="card-body">
+							<div id="graph_solicitudes" style="height: 200px;"></div>
+						</div>
+					</div>
 				</div>
-				<div class="col-md-3">
-					<canvas id="canvas_ctx_retrabajos" style="height:90px"></canvas>
+				
+				<div class="col-md-6">
+					<div class="card">
+						<h6 class="card-header">Avance a renovaciones</h6>
+						<div class="card-body">
+							<div id="graph_renovaciones" style="height: 200px;"></div>
+						</div>
+					</div>
 				</div>
 			</div>
 		
 			<p></p>
-			<div class="row">
-				<div class="col-md-6">
-					<canvas id="canvas_historic_chart">
-					</canvas>
-				</div>
-			</div>
-			
+
 		
 		</div>
 	</div>
@@ -118,12 +137,10 @@
 		$('#cb_office').html("");
 		$('#cb_office').prop('disabled', 'disabled');
 
-
-     	load_directions();
+		$('#new_indicators').hide();
+		load_directions();
 		load_years();
-		init_charts_now();
-        inut_charts_historic();
-		
+		init_indicators();
 
 		
 
