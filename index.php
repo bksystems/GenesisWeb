@@ -2,7 +2,7 @@
 <html>
 <head>
    <?php
-   	$title_page = "Actividades en campo Génesis"; 
+   	$title_page = "Portal Génesis"; 
    	include('views//template_plugins//main_template_head.php');
    ?>
 </head>

@@ -5,7 +5,7 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link" href="index.php">Inicio <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="../../index.php">Inicio <span class="sr-only">(current)</span></a>
       <a class="nav-item nav-link" href="../indicators/index.php">Dashboard <span class="sr-only"></span></a>
       <a class="nav-item nav-link" href="../structures/map_viewer.php">Mapa <span class="sr-only"></span></a>
       <li class="nav-item dropdown">

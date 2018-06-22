@@ -64,6 +64,17 @@
                         where ri.year = '$year' 
                         GROUP BY mi.letter_month order by mi.number_month  ";
         $result_reworks = mysqli_query($connect, $query_reworks);
+
+        $query_prospects = "SELECT 'All' As 'Grupo'
+                    , mi.letter_month as 'Month'
+                    , (SUM(ai.applicants_prospectos)) As 'Prospectos'
+                    , (SUM(ai.applicants_dm) + SUM(ai.applicants_papel))  As 'Clientes' 
+                FROM tb_indicators_applicants ai 
+                INNER JOIN sys_tb_indicators_months mi 
+                    ON mi.number_month = ai.month 
+                where ai.year = 2018 
+                GROUP BY mi.letter_month order by mi.number_month ";
+        $result_prospects = mysqli_query($connect, $query_prospects);
         
         $query_csc_reworks = "SELECT 'All' AS 'Grupo'
                                 , mi.letter_month as 'Month' 
@@ -131,7 +142,7 @@
                         GROUP BY ri.year, mi.letter_month order by mi.number_month;";
         $result_now_csc_reworks = mysqli_query($connect, $query_now_csc_reworks);
         
-        request_json_result($result_applicants, $result_reworks, $result_request, $result_csc_reworks, $result_now_solicitantes, $result_now_solicitudes, $result_now_reworks, $result_now_csc_reworks);
+        request_json_result($result_applicants, $result_reworks, $result_request, $result_csc_reworks, $result_now_solicitantes, $result_now_solicitudes, $result_now_reworks, $result_now_csc_reworks, $result_prospects);
     }
     
     function get_indicators_by_direction($year, $id_consulta){
@@ -184,6 +195,21 @@
                         GROUP BY mi.letter_month order by mi.number_month ";
         $result_request = mysqli_query($connect, $query_request);
         
+        $query_prospects = "SELECT 'All' As 'Grupo'
+                    , mi.letter_month as 'Month'
+                    , (SUM(ri.applicants_prospectos)) As 'Prospectos'
+                    , (SUM(ri.applicants_dm) + SUM(ri.applicants_papel))  As 'Clientes' 
+                FROM tb_indicators_applicants ri 
+                INNER JOIN sys_tb_indicators_months mi 
+                    ON mi.number_month = ri.month 
+                INNER JOIN sys_structure_offices ofi on ofi.id = ri.id_os
+                INNER JOIN sys_structure_regions reg on reg.id = ofi.region_id
+                INNER JOIN sys_structure_subdirections sub on sub.id = reg.subdirection_id
+                INNER JOIN sys_structure_directions dir on dir.id = sub.direction_id
+                    where ri.year = '$year' and dir.id = '$id_consulta' 
+                GROUP BY mi.letter_month order by mi.number_month ";
+        $result_prospects = mysqli_query($connect, $query_prospects);
+
         $query_csc_reworks = "SELECT 'All' AS 'Grupo'
                                 , mi.letter_month as 'Month' 
                                 , (SUM(ri.approved) / (SUM(ri.approved) + SUM(ri.incident) + SUM(ri.recovery))) * 100.00 AS 'Aprobados'
@@ -271,7 +297,8 @@
                         GROUP BY ri.year, mi.letter_month order by mi.number_month;";
         $result_now_csc_reworks = mysqli_query($connect, $query_now_csc_reworks);
 
-        request_json_result($result_applicants, $result_reworks, $result_request, $result_csc_reworks, $result_now_solicitantes, $result_now_solicitudes, $result_now_reworks, $result_now_csc_reworks);
+        request_json_result($result_applicants, $result_reworks, $result_request, $result_csc_reworks, 
+                    $result_now_solicitantes, $result_now_solicitudes, $result_now_reworks, $result_now_csc_reworks, $result_prospects);
     }
 
     function get_indicators_by_subdirection($year, $id_consulta){
@@ -320,6 +347,20 @@
                             where ri.year = '$year' and sub.id = '$id_consulta' 
                         GROUP BY mi.letter_month order by mi.number_month ";
         $result_request = mysqli_query($connect, $query_request);
+
+        $query_prospects = "SELECT 'All' As 'Grupo'
+                    , mi.letter_month as 'Month'
+                    , (SUM(ri.applicants_prospectos)) As 'Prospectos'
+                    , (SUM(ri.applicants_dm) + SUM(ri.applicants_papel))  As 'Clientes' 
+                FROM tb_indicators_applicants ri 
+                INNER JOIN sys_tb_indicators_months mi 
+                    ON mi.number_month = ri.month 
+                INNER JOIN sys_structure_offices ofi on ofi.id = ri.id_os
+                INNER JOIN sys_structure_regions reg on reg.id = ofi.region_id
+                INNER JOIN sys_structure_subdirections sub on sub.id = reg.subdirection_id
+                    where ri.year = '$year' and sub.id = '$id_consulta' 
+                GROUP BY mi.letter_month order by mi.number_month ";
+        $result_prospects = mysqli_query($connect, $query_prospects);
         
         $query_csc_reworks = "SELECT 'All' AS 'Grupo'
                                 , mi.letter_month as 'Month' 
@@ -403,7 +444,8 @@
                         GROUP BY ri.year, mi.letter_month order by mi.number_month;";
         $result_now_csc_reworks = mysqli_query($connect, $query_now_csc_reworks);
 
-        request_json_result($result_applicants, $result_reworks, $result_request, $result_csc_reworks,  $result_now_solicitantes, $result_now_solicitudes, $result_now_reworks, $result_now_csc_reworks);
+        request_json_result($result_applicants, $result_reworks, $result_request, $result_csc_reworks,  $result_now_solicitantes
+            , $result_now_solicitudes, $result_now_reworks, $result_now_csc_reworks, $result_prospects);
     }
 
     function get_indicators_by_region($year, $id_consulta){
@@ -449,6 +491,19 @@
                             where ri.year = '$year' and reg.id = '$id_consulta' 
                         GROUP BY mi.letter_month order by mi.number_month ";
         $result_request = mysqli_query($connect, $query_request);
+
+        $query_prospects = "SELECT 'All' As 'Grupo'
+                    , mi.letter_month as 'Month'
+                    , (SUM(ri.applicants_prospectos)) As 'Prospectos'
+                    , (SUM(ri.applicants_dm) + SUM(ri.applicants_papel))  As 'Clientes' 
+                FROM tb_indicators_applicants ri 
+                INNER JOIN sys_tb_indicators_months mi 
+                    ON mi.number_month = ri.month 
+                INNER JOIN sys_structure_offices ofi on ofi.id = ri.id_os
+                INNER JOIN sys_structure_regions reg on reg.id = ofi.region_id
+                    where ri.year = '$year' and reg.id = '$id_consulta' 
+                GROUP BY mi.letter_month order by mi.number_month ";
+        $result_prospects = mysqli_query($connect, $query_prospects);
         
         $query_csc_reworks = "SELECT 'All' AS 'Grupo'
                                 , mi.letter_month as 'Month' 
@@ -527,7 +582,8 @@
                         GROUP BY ri.year, mi.letter_month order by mi.number_month;";
         $result_now_csc_reworks = mysqli_query($connect, $query_now_csc_reworks);
 
-        request_json_result($result_applicants, $result_reworks, $result_request, $result_csc_reworks,  $result_now_solicitantes, $result_now_solicitudes, $result_now_reworks, $result_now_csc_reworks);
+        request_json_result($result_applicants, $result_reworks, $result_request, $result_csc_reworks
+                    ,  $result_now_solicitantes, $result_now_solicitudes, $result_now_reworks, $result_now_csc_reworks, $result_prospects);
     }
 
     function get_indicators_by_office($year, $id_consulta){
@@ -570,6 +626,18 @@
                             where ri.year = '$year' and ri.id_os = '$id_consulta' 
                         GROUP BY mi.letter_month order by mi.number_month ";
         $result_request = mysqli_query($connect, $query_request);
+
+        $query_prospects = "SELECT 'All' As 'Grupo'
+                    , mi.letter_month as 'Month'
+                    , (SUM(ri.applicants_prospectos)) As 'Prospectos'
+                    , (SUM(ri.applicants_dm) + SUM(ri.applicants_papel))  As 'Clientes' 
+                FROM tb_indicators_applicants ri 
+                INNER JOIN sys_tb_indicators_months mi 
+                    ON mi.number_month = ri.month 
+                INNER JOIN sys_structure_offices ofi on ofi.id = ri.id_os
+                    where ri.year = '$year' and ofi.id = '$id_consulta' 
+                GROUP BY mi.letter_month order by mi.number_month ";
+        $result_prospects = mysqli_query($connect, $query_prospects);
         
         $query_csc_reworks = "SELECT 'All' AS 'Grupo'
                                 , mi.letter_month as 'Month' 
@@ -643,10 +711,13 @@
                         GROUP BY ri.year, mi.letter_month order by mi.number_month;";
         $result_now_csc_reworks = mysqli_query($connect, $query_now_csc_reworks);
 
-        request_json_result($result_applicants, $result_reworks, $result_request, $result_csc_reworks, $result_now_solicitantes, $result_now_solicitudes, $result_now_reworks, $result_now_csc_reworks);
+        request_json_result($result_applicants, $result_reworks, $result_request, $result_csc_reworks
+                , $result_now_solicitantes, $result_now_solicitudes, $result_now_reworks, $result_now_csc_reworks, $result_prospects);
     }
 
-    function request_json_result($result_applicants, $result_reworks, $result_request, $result_csc_reworks, $result_now_solicitantes, $result_now_solicitudes, $result_now_reworks, $result_now_csc_reworks){
+    function request_json_result($result_applicants, $result_reworks, $result_request, $result_csc_reworks
+                                            , $result_now_solicitantes, $result_now_solicitudes, $result_now_reworks
+                                            , $result_now_csc_reworks, $result_prospects){
         global $connect;
 
         $json_request = array();
@@ -659,6 +730,7 @@
         $json_data_now_solicitudes = array();
         $json_data_now_reworks= array();
         $json_data_now_csc_reworks = array();
+        $json_data_result_prospects = array();
 
 		if($result_applicants && $result_reworks && $result_request){
             $json_data = array();
@@ -695,9 +767,14 @@
                 $json_data_now_csc_reworks[]  = array_map('utf8_encode', $row);
             }
 
+            while($row = mysqli_fetch_assoc($result_prospects)){
+                $json_data_result_prospects[]  = array_map('utf8_encode', $row);
+            }
+
             $json_data_result['applicants'] = $json_data_result_applicants;
             $json_data_result['reworks'] = $json_data_result_reworks;
             $json_data_result['requests'] = $json_data_result_request;
+            $json_data_result['prospects'] = $json_data_result_prospects;
             $json_data_result['csc_reworks'] = $json_data_result_css_reworks;
             $json_data_result['now_solicitantes'] = $json_data_now_solicitantes;
             $json_data_result['now_solicitudes'] = $json_data_now_solicitudes;
