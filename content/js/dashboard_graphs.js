@@ -25,6 +25,9 @@ var chart_now_retrabajos = null;
 var now_atencion_csc = null;
 var chart_now_atencion_csc = null;
 
+var div_canvas_motivos_retrabajos_css = null;
+var chart_motivos_retrabajos_css = null;
+
 function initialize_charts(){
 
     now_solicitantes = document.getElementById('now_solicitantes').getContext('2d');
@@ -33,13 +36,15 @@ function initialize_charts(){
         data:{
             datasets:[{
                 data:[50,50],
+                borderWidth: .5,
+                borderDash:[5,5],
                 borderColor: [
                     'rgba(0,204,102,1)', 
-                    'rgba(255,102,102,1)'
+                    'rgba(255,102,102,.7)'
                 ],
                 backgroundColor: [
-                    'rgba(0,204,102,1)', 
-                    'rgba(255,102,102,1)'
+                    'rgba(0,204,102,.3)', 
+                    'rgba(255,102,102,.3)'
                 ],
             }],
             labels:['Dispositivo', 'Papel']
@@ -47,7 +52,8 @@ function initialize_charts(){
         options:{
             animation: {
                 animateScale: true,
-                animateRotate: true
+                animateRotate: true,
+                duration:1500
             },
             title: {
                 display: true,
@@ -83,7 +89,8 @@ function initialize_charts(){
             cutoutPercentage: 50,
             animation: {
                 animateScale: true,
-                animateRotate: true
+                animateRotate: true,
+                duration:1500
             },
             title: {
                 display: true,
@@ -113,7 +120,8 @@ function initialize_charts(){
             cutoutPercentage: 50,
             animation: {
                 animateScale: true,
-                animateRotate: true
+                animateRotate: true,
+                duration:1500
             },
             title: {
                 display: true,
@@ -145,7 +153,8 @@ function initialize_charts(){
             cutoutPercentage: 50,
             animation: {
                 animateScale: true,
-                animateRotate: true
+                animateRotate: true,
+                duration:1500
             },
             title: {
                 display: true,
@@ -186,6 +195,11 @@ function initialize_charts(){
             title: {
                 display: true,
                 text: 'SOLICITANTES'
+            },
+            animation:{
+                animateScale: true,
+                animateRotate: true,
+                duration:1500
             },
             tooltipTemplate: "<%if (label){%><%=label %>: <%}%><%= value + ' %' %>",
             multiTooltipTemplate: "<%= value + ' %' %>",
@@ -234,6 +248,11 @@ function initialize_charts(){
                 display: true,
                 text: 'SOLICITUDES'
             },
+            animation:{
+                animateScale: true,
+                animateRotate: true,
+                duration:1500
+            },
         }
     });
 
@@ -271,6 +290,11 @@ function initialize_charts(){
                 display: true,
                 text: 'RETRABAJOS'
             },
+            animation:{
+                animateScale: true,
+                animateRotate: true,
+                duration:1500
+            },
         }
     });
 
@@ -307,9 +331,11 @@ function initialize_charts(){
                 display: true,
                 text: 'PROSPECCIÓN'
             },
-            tooltipTemplate: "<%if (label){%><%=label %>: <%}%><%= value + ' %' %>",
-            multiTooltipTemplate: "<%= value + ' %' %>",
-            cutoutPercentage: true
+            animation:{
+                animateScale: true,
+                animateRotate: true,
+                duration:1500
+            }
         }
     });
 
@@ -353,7 +379,61 @@ function initialize_charts(){
                 display: true,
                 text: 'NIVEL RETRABAJOS'
             },
-            cutoutPercentage: true
+            animation:{
+                animateScale: true,
+                animateRotate: true,
+                duration:1500
+            },
+        }
+    });
+
+    div_canvas_motivos_retrabajos_css = document.getElementById('div_canvas_motivos_retrabajos_css').getContext('2d');
+    chart_motivos_retrabajos_css = new Chart(div_canvas_motivos_retrabajos_css, {
+        type: 'line',
+        data:{
+            datasets:[{
+                label: 'ACBC',
+                type: 'line',
+                borderColor:'rgba(123,154,12,1)',
+                backgroundColor:'rgba(123,154,12,1)',
+                fill: false
+            },{
+               label: 'COD',
+               type: 'line',
+               borderColor:'rgba(100,30,100,1)',
+               backgroundColor:'rgba(100,30,100,1)',
+                fill: false 
+            },{
+                label: 'IFE A',
+                type: 'line',
+                borderColor:'rgba(200,154,12,1)',
+                backgroundColor:'rgba(200,154,12,1)',
+                fill: false
+            },{
+                label: 'IFE R',
+                type: 'line',
+                borderColor:'rgba(11,154,120,1)',
+                backgroundColor:'rgba(11,154,120,1)',
+                fill: false
+            }]
+        },
+        options:{
+            title:{
+                display: true,
+                text: 'Documentos rechazados'
+            },
+            scales:{
+                yAxes:[{
+                    ticks:{
+                        min:0
+                    }
+                }]
+            },
+            animation:{
+                animateScale: true,
+                animateRotate: true,
+                duration:1500
+            },
         }
     });
 
