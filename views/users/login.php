@@ -16,19 +16,14 @@
                     <div class="card-body">
                         <form>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                <label for="inputNumberEmployee">Numero de empleado</label>
+                                <input type="number" class="form-control" id="inputNumberEmployee" aria-describedby="numberHelp" placeholder="Ingresa numero de empleado">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="passwordEmployee">Password</label>
+                                <input type="password" class="form-control" id="passwordEmployee" placeholder="Password">
                             </div>
-                            <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                            </div>
-                            <button type="button" id="loginbtn" class="btn btn-primary">Submit</button>
+                            <button type="button" id="loginbtn" class="btn btn-primary">Ingresar</button>
                         </form>
                         <div id="error_validation" class="login-validation-error"></div>
                     </div>
@@ -102,7 +97,8 @@
 					success: function(response){
 						var jsonObj = response.data;
         				if(jsonObj[0].success == true){
-        					window.location.replace("../../index.php")
+        					//window.location.replace("../../index.php")
+							$('#error_validation').text('credenciales correctas');
         				}else{
 							$("#login-validation").css("display", "none");
 							$('#error_validation').text('credenciales incorrectas');
