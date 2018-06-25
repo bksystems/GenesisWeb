@@ -5,16 +5,16 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link" href="../../index.php">Inicio <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="../indicators/index.php">Dashboard <span class="sr-only"></span></a>
-      <a class="nav-item nav-link" href="../structures/map_viewer.php">Mapa <span class="sr-only"></span></a>
+      <a class="nav-item nav-link" href="index.php">Inicio <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="views/indicators/index.php">Dashboard <span class="sr-only"></span></a>
+      <a class="nav-item nav-link" href="views/structures/map_viewer.php">Mapa <span class="sr-only"></span></a>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Seguimiento Génesis
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="../activity_teams/index.php">Actividades en campo</a>
-          <a class="dropdown-item" href="../employees/shelter_letters.php">Cartas resguardo</a>
+          <a class="dropdown-item" href="views/activity_teams/index.php">Actividades en campo</a>
+          <a class="dropdown-item" href="views/employees/shelter_letters.php">Cartas resguardo</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Matríz de operaciones</a>
           <a class="dropdown-item" href="#">Matríz de ventas</a>
@@ -26,8 +26,8 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <h6 class="dropdown-header">Catalogos de sistema</h6>
-            <a class="dropdown-item" href="../structures/index.php">Estructura</a>
-            <a class="dropdown-item" href="../employees/index.php">Empleados</a>
+            <a class="dropdown-item" href="views/structures/index.php">Estructura</a>
+            <a class="dropdown-item" href="views/employees/index.php">Empleados</a>
           <div class="dropdown-divider"></div>
             <h6 class="dropdown-header">Mantenimiento de indicadores</h6>
             <a class="dropdown-item" href="#">Solicitantes</a>

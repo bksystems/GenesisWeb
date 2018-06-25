@@ -40,11 +40,11 @@ function initialize_charts(){
                 borderDash:[5,5],
                 borderColor: [
                     'rgba(0,204,102,1)', 
-                    'rgba(255,102,102,.7)'
+                    'rgba(255,102,102,1)'
                 ],
                 backgroundColor: [
-                    'rgba(0,204,102,.3)', 
-                    'rgba(255,102,102,.3)'
+                    'rgba(0,204,102,1)', 
+                    'rgba(255,102,102,1)'
                 ],
             }],
             labels:['Dispositivo', 'Papel']
@@ -322,8 +322,7 @@ function initialize_charts(){
             scales: {
                 yAxes: [{
                     ticks: {
-                        min: 0,
-                        max: 100
+          
                     }
                 }]
             },
@@ -457,9 +456,9 @@ function update_indicators(year_consult, type_report, index_consult){
     var element_retrabajos_ideal = [];
     var element_retrabajos_retrabajos = [];
 
-    var element_prospeccion_labels = [];
-    var element_prospeccion_prospectos = [];
-    var element_prospeccion_clientes = [];
+    var element_prospects_labels = [];
+    var element_prospects_prospect = [];
+    var element_prospects_customer = [];
 
     var element_csc_reworks_labels = [];
     var element_csc_reworks_accept = [];
@@ -538,7 +537,17 @@ function update_indicators(year_consult, type_report, index_consult){
                 element_now_csc_reworks_data[2] = value.Recuperaciones;
             });
 
+            $.each(data.data.prospects, function(index, value){
+                element_prospects_labels[index] = value.Month;
+                element_prospects_prospect[index] = value.Prospectos;
+                element_prospects_customer[index] = value.Clientes;
+            });
+
             
+
+            chart_prospeccion.data.labels = element_prospects_labels;
+            chart_prospeccion.data.datasets[0].data = element_prospects_prospect;
+            chart_prospeccion.data.datasets[1].data = element_prospects_customer;
 
           chart_solicitantes.data.labels = element_solicitantes_labels;
           chart_solicitantes.data.datasets[0].data = element_solicitantes_dispositivo;
@@ -566,6 +575,7 @@ function update_indicators(year_consult, type_report, index_consult){
           chart_solicitantes.update();
           chart_solicitudes.update();
           chart_retrabajos.update();
+          chart_prospeccion.update();
           chart_csc_reworks.update();
           chart_now_solicitantes.update();
           chart_now_solicitudes.update();
