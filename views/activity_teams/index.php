@@ -42,6 +42,15 @@
 						<h6>Registros de actividades</h6>
 					</div>
 					<div class="card-body">
+						<table id="activites_table" class="table table-hover table-borderless">
+							<thead>
+								<tr>
+									<th>Tipo de actividad</th>
+									<th>Empleado</th>
+									<th>Fecha y hora</th>
+								</tr>
+							</thead>
+						</table>
 						<div id="content" class="list-group"  style="height: 700px; overflow-y: scroll;">	
 
 						</div>
@@ -90,6 +99,8 @@
 	}
 
 	$(document).ready(function(){
+
+		$('#activites_table').DataTable();
 
 		setInterval(function() { // Do this
 			update_activitys();

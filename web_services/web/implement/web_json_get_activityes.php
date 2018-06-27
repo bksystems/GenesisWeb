@@ -13,7 +13,7 @@
 						, imp.activity
 						, imp.description
 						, imp.created 
-					FROM tb_implement_activities imp INNER JOIN sys_tb_users usr 
+					FROM tb_implement_activities imp INNER JOIN sys_tb_employees usr 
 					ON usr.id = imp.id_user 
 					ORDER BY imp.created desc";
 		$result = mysqli_query($connect, $query);

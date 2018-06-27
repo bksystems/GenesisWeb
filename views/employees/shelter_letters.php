@@ -26,9 +26,8 @@
 							<th>Nómina</th>
 							<th>Colaborador</th>
 							<th>Puesto</th>
-							<th>Estatus</th>
-							<th>Estatus Carta</th>
-							<th>Cargar documento</th>
+							<th>Documento</th>
+							<th>Acción</th>
 						</tr>
 					</thead>
 				</table>
@@ -72,21 +71,31 @@
 				{data: 'number'},
 				{data: 'employee_name'},
 				{data: 'position'},
-				{data: 'status_employee'},
-				{data: 'status_shelter'},
-				{"defaultContent": "<button class='btn btn-primary btn-sm'>Cargar carta</button>"}
+				{ data: "path_file",    render: function ( data, type, row ) {
+                if ( type === 'display' ) {
+                    var numberRenderer = $.fn.dataTable.render.number( ',', '.', 0, '$' ).display;
+					$print_result = '';
+					if(data != ''){
+						$print_result = '<a class="text-success" href=../../' + data +' target="_blank">Descargar</a>';
+					}else{
+						$print_result = '<p class="text-danger">Sin carta</p>';
+					}
+                    return  $print_result;
+                }
+                return data;
+            	}},
+				{"defaultContent": "<button class='btn btn-primary btn-sm'>Cargar</button>"},
 			]
 		});
 
 		$('#employee_details tbody').on( 'click', 'button', function () {
 			var data = table.row( $(this).parents('tr') ).data();
-			data_number = data['number'];
+			data_number = data['number'] + '.pdf';
 			if(data['status_shelter'] == 'Con Carta'){
-				
+				alert('El usuario: ' + data['employee_name'] + ' ya cuenta con carta\nEsta a punto de remplazarla.')
 			}
 			$('#load_shelter').trigger('click', function(){
 			});
-			//alert( data['direction'] +" 's salary is: "+ data[ 5 ] );
 		});
 
 		$('#load_shelter').on( 'change', function() {
@@ -94,19 +103,19 @@
 			var ext = myfile.split('.').pop();
 			if(ext=="pdf"){
 				var file_data = $('#load_shelter').prop('files')[0];  
-				var form_data = new FormData(); 
-				form_data.append('file_name', data_number);                 
-				form_data.append('file', file_data);                            
+				var form_data = new FormData();              
+				form_data.append('file', file_data, data_number);                         
 				$.ajax({
-					url: '../../web_services/web/employees/controller_file_upload.php', // point to server-side PHP script 
-					dataType: 'text',  // what to expect back from the PHP script, if anything
+					url: '../../web_services/web/employees/controller_file_upload.php',
+					dataType: 'text', 
 					cache: false,
 					contentType: false,
 					processData: false,
-					data: form_data,                         
+					data: form_data,                   
 					type: 'post',
 					success: function(php_script_response){
-						alert(php_script_response); // display response from the PHP script, if any
+						alert(php_script_response); 
+						table.ajax.reload();
 				}
 			});
 			} else{

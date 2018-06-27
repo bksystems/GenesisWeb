@@ -30,6 +30,7 @@
 				}
 				$user_array['user_employee'] = $employee_array;
 			}
+			
 		}
 		header('Content-type: application/json; charset=utf.8');
 		$json_result['data'] = $user_array;
