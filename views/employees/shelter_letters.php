@@ -16,7 +16,7 @@
 		<div class="card">
 			<div class="card-header">Cartas resguardo</div>
 			<div class="card-body">
-				<table id="employee_details" style="font-size:11px;" class="table table-hover table-striped">
+				<table id="employee_details" style="font-size:12px;" class="table table-hover table-striped">
 					<thead>
 						<tr>
 							<th>Dirección</th>
@@ -24,12 +24,11 @@
 							<th>Región</th>
 							<th>Oficina</th>
 							<th>Nómina</th>
-							<th>Apellido Paterno</th>
-							<th>Apellido Materno</th>
-							<th>Nombre(s)</th>
+							<th>Colaborador</th>
 							<th>Puesto</th>
 							<th>Estatus</th>
-							<th>Requiere Carta</th>
+							<th>Estatus Carta</th>
+							<th>Cargar documento</th>
 						</tr>
 					</thead>
 				</table>
@@ -41,13 +40,14 @@
 		  include('..//template_plugins//pages_template_footer.php');
   	?>
 
-	
+	<input type="file" id="load_shelter" style="display:none"/> 
 </body>
 </html>
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#employee_details').DataTable({
+		var data_number = 0;
+		var table = $('#employee_details').DataTable({
 			'language':{
 				'search':'Buscar _INPUT_ en la tabla',
 				'lengthMenu': 'Mostrar _MENU_ rengistros por pagina',
@@ -70,13 +70,48 @@
 				{data: 'region'},
 				{data: 'name'},
 				{data: 'number'},
-				{data: 'first_last_name'},
-				{data: 'second_last_name'},
-				{data: 'names'},
+				{data: 'employee_name'},
 				{data: 'position'},
 				{data: 'status_employee'},
-				{data: 'require_shelter'}
+				{data: 'status_shelter'},
+				{"defaultContent": "<button class='btn btn-primary btn-sm'>Cargar carta</button>"}
 			]
+		});
+
+		$('#employee_details tbody').on( 'click', 'button', function () {
+			var data = table.row( $(this).parents('tr') ).data();
+			data_number = data['number'];
+			if(data['status_shelter'] == 'Con Carta'){
+				
+			}
+			$('#load_shelter').trigger('click', function(){
+			});
+			//alert( data['direction'] +" 's salary is: "+ data[ 5 ] );
+		});
+
+		$('#load_shelter').on( 'change', function() {
+			myfile = $( this ).val();
+			var ext = myfile.split('.').pop();
+			if(ext=="pdf"){
+				var file_data = $('#load_shelter').prop('files')[0];  
+				var form_data = new FormData(); 
+				form_data.append('file_name', data_number);                 
+				form_data.append('file', file_data);                            
+				$.ajax({
+					url: '../../web_services/web/employees/controller_file_upload.php', // point to server-side PHP script 
+					dataType: 'text',  // what to expect back from the PHP script, if anything
+					cache: false,
+					contentType: false,
+					processData: false,
+					data: form_data,                         
+					type: 'post',
+					success: function(php_script_response){
+						alert(php_script_response); // display response from the PHP script, if any
+				}
+			});
+			} else{
+				alert('Solo se pueden cargar documentos extensión PDF');
+			}
 		});
 	});
 </script>
