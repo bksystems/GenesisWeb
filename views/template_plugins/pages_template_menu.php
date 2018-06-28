@@ -4,7 +4,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
+    <ul class="navbar-nav mr-auto">
       <a class="nav-item nav-link" href="../../index.php">Inicio <span class="sr-only">(current)</span></a>
       <a class="nav-item nav-link" href="../indicators/index.php">Dashboard <span class="sr-only"></span></a>
       <a class="nav-item nav-link" href="../structures/map_viewer.php">Mapa <span class="sr-only"></span></a>
@@ -52,7 +52,18 @@
             <a class="dropdown-item" href="#">Logs</a>
         </div>
       </li>
-    </div>
+    </ul>
+    <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <?php echo $_SESSION['employee']['names'] . ' ' . $_SESSION['employee']['first_lastname'] . ' ' . $_SESSION['employee']['second_lastname'] ?>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="../../web_services/web/users/logout_end.php">Log Out</a>
+                <a class="dropdown-item" href="#">Another action</a>
+            </div>
+        </li>
+      </ul>
   </div>
 </nav>
 <br>

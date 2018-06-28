@@ -37,7 +37,7 @@
             $json_request['result'] = true;
             $json_request['message'] = 'Success';
             $json_request['data'] = $json_result_data;
-            logs_controller(1,'succes', 'get employees', 'employees', 'read employees', 'se obtubieron los empleados', 'empty');
+            //logs_controller(1,'succes', 'get employees', 'employees', 'read employees', 'se obtubieron los empleados', 'empty');
         }else{
 			$json_request['result'] = false;
 			$json_request['message'] = 'Error';

@@ -38,7 +38,7 @@
 							<h6>Listado de empleados</h6>
 						</div>
 						<div class="card-body">
-							<table id="table_employees" class="table table-hover table-striped table-bordered" style="font-size:13px;">
+							<table id="table_employees" class="table table-hover table-striped table-bordered" style="font-size:12px;">
 								<thead>
 									<tr>
 										<th>Nómina</th>
