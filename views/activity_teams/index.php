@@ -1,4 +1,6 @@
-
+<?php
+    include('..//controllers//session_controller.php');
+?>
 <!DOCTYPE html>
 <html>
 <head>

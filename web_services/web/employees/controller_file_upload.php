@@ -21,7 +21,7 @@
                         unlink($_FILES['file']['tmp_name'], '../../../' . $path);
                         move_uploaded_file($_FILES['file']['tmp_name'], '../../../' . $path);
                         echo 'Se guardo correctamente la carta del usuario';
-                        logs_controller(1,'succes', 'file_upload', 'employee', 'shelter upload', 'Se guardo correctamente la carta del usuario', 'empty');
+                        //logs_controller(1,'succes', 'file_upload', 'employee', 'shelter upload', 'Se guardo correctamente la carta del usuario', 'empty');
                     }else{
                         echo 'No se inserto en la tabla' . $query_insert;
                     }

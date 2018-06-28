@@ -1,1 +1,3 @@
-<?php include('..//..//web_services//web//users//login_session_validate.php');?>
+<?php
+    include('..//controllers//session_controller.php');
+?>

@@ -1,11 +1,18 @@
 <?php
     $controller_name = get_controller_name($_SERVER['SCRIPT_FILENAME']);
     $action_name = get_action_name($_SERVER['SCRIPT_FILENAME']);
+    session_set_cookie_params(0);
     session_start();
-    if(isset($_SESSION['session_user']) && isset($_SESSION['session_state']) && isset($_SESSION['session_date'])){
+    if(isset($_SESSION['session']) && isset($_SESSION['employee']) &&$_SESSION['state'] == true){
 
+        //header('location: ../'. $controller_name . '/'. $action_name . '.php');      
+  
     }else{
-        header('location: ../users/login.php');
+        if($controller_name == "GenesisWeb"){
+            header('location: views/users/login.php');
+        }else{
+            header('location: ../users/login.php');
+        }
         exit();
     }
 

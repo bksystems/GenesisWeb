@@ -2,6 +2,6 @@
     session_start();
     unset($_SESSION);
     session_destroy();
-    header('location: login.php'); 
+    header('location: ../../../views/users/login.php'); 
     die();
 ?>

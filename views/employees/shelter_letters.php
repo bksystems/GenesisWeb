@@ -1,3 +1,6 @@
+<?php
+    include('..//controllers//session_controller.php');
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,7 +74,7 @@
 				{data: 'number'},
 				{data: 'employee_name'},
 				{data: 'position'},
-				{ data: "path_file",    render: function ( data, type, row ) {
+				{ data: "path_file", render: function ( data, type, row ) {
                 if ( type === 'display' ) {
                     var numberRenderer = $.fn.dataTable.render.number( ',', '.', 0, '$' ).display;
 					$print_result = '';
@@ -94,7 +97,7 @@
 			if(data['status_shelter'] == 'Con Carta'){
 				alert('El usuario: ' + data['employee_name'] + ' ya cuenta con carta\nEsta a punto de remplazarla.')
 			}
-			$('#load_shelter').trigger('click', function(){
+				$('#load_shelter').trigger('click', function(){
 			});
 		});
 

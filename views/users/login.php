@@ -16,12 +16,12 @@
                     <div class="card-body">
                         <form>
                             <div class="form-group">
-                                <label for="inputNumberEmployee">Numero de empleado</label>
-                                <input type="number" class="form-control" id="inputNumberEmployee" aria-describedby="numberHelp" placeholder="Ingresa numero de empleado">
+                                <label for="user_number">Numero de empleado</label>
+                                <input type="number" class="form-control" id="user_number" aria-describedby="numberHelp" placeholder="Ingresa numero de empleado">
                             </div>
                             <div class="form-group">
-                                <label for="passwordEmployee">Password</label>
-                                <input type="password" class="form-control" id="passwordEmployee" placeholder="Password">
+                                <label for="user_password">Password</label>
+                                <input type="password" id="user_password" class="form-control" placeholder="Password">
                             </div>
                             <button type="button" id="loginbtn" class="btn btn-primary">Ingresar</button>
                         </form>
@@ -36,7 +36,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#login-validation").css("display", "none");
-		 $("#user_nomina").keydown(function (e) {
+		 $("#user_number").keydown(function (e) {
 		        // Allow: backspace, delete, tab, escape, enter and .
 		        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
 		             // Allow: Ctrl+A, Command+A
@@ -54,7 +54,7 @@
 
 
 		
-		$("#user_nomina").on("change keyup", function() {
+		$("#user_number").on("change keyup", function() {
 			$('#error_nomina').text('');
 			$('#error_validation').text('');
 		});
@@ -65,9 +65,9 @@
 		
 		$('#loginbtn').click(function(){
 			$result = true;
-			$username = $("#user_nomina").val();
+			$username = $("#user_number").val();
 			$password = $("#user_password").val();
-		    $password = md5($password);
+		    //$password = md5($password);
 		        
 			if($username == ""){
 				$('#error_nomina').text('Este campo es obligatorio');
@@ -85,19 +85,12 @@
 					dataType:'json',
 					url: '../../web_services/web/users/login.init.php',
 					data:{
-						'username': $username,
-						'password': $password,
-						'access_type': 'web',
-						'access_system': 'noting',
-						'ip_address': 'noting',
-						'serial_number': 'noting',
-						'imei': 'noting',
-						'sim_card_number': 'noting'
+						'user_username': $username,
+						'user_password': $password
 					},
 					success: function(response){
-						var jsonObj = response.data;
-        				if(jsonObj[0].success == true){
-        					//window.location.replace("../../index.php")
+        				if(response.result == true){
+        					window.location.replace("../../index.php")
 							$('#error_validation').text('credenciales correctas');
         				}else{
 							$("#login-validation").css("display", "none");
