@@ -1,5 +1,5 @@
 <?php
-    include('views//controllers//session_controller.php');
+    include('views//controllers//detail.php');
 ?>
 <!DOCTYPE html>
 <html>

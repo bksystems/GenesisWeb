@@ -1,38 +1,47 @@
 <?php
+    session_start();
+    //session_set_cookie_params(1);
     $controller_name = get_controller_name($_SERVER['SCRIPT_FILENAME']);
     $action_name = get_action_name($_SERVER['SCRIPT_FILENAME']);
-    session_set_cookie_params(0);
-    session_start(); 
-    if(isset($_SESSION['session']) && isset($_SESSION['employee']) && $_SESSION['state'] == true){    
-        $index_array = array_search($controller_name, array_column($_SESSION['permissions'], 'controller'));
+    if(isset($_SESSION['session']) && isset($_SESSION['employee']) && $_SESSION['state'] == 1){   
+        $index_array = array_search($controller_name, array_column($_SESSION['permissions'], 'controller'));    
+        //validamos que el permiso se encuentre registrado
         if($index_array != null){
-            
-            $inde_array_integer = intval($index_array);
-            $permision_type = '';
-            switch ($action_name) {
-                case "index":
-                    $permision_type = "is_index";
+            $type_action_page = null;
+            switch ($action_name){
+                case 'index':
+                    $type_action_page = 'is_index';
                     break;
-                case "add":
-                    $permision_type = "is_add";
+                case 'add':
+                    $type_action_page = 'is_add';
                     break;
-                case "edit":
-                    $permision_type = "is_edit";
+                case 'edit':
+                    $type_action_page = 'is_edit';
                     break;
-                case "delete":
-                    $permision_type = "is_delete";
+                case 'delete':
+                    $type_action_page = 'is_delete';
+                    break;
+                case 'detail':
+                    $type_action_page = 'is_details';
                     break;
             }
-            
-            if($_SESSION['permissions'][$inde_array_integer][$permision_type] == 1){
+            //validamos que el tipo no se encuentre vacio
+            if($type_action_page != null){
+
+                $is_enabled = null;
+                $is_enabled = $_SESSION['permissions'][$index_array][$type_action_page];
+                //validamos si tenga permiso
+                if($is_enabled != null){
                 
+                }else{
+                    redirect_page($controller_name, false);
+                }
             }else{
-               redirect_page($controller_name, false);  
+                redirect_page($controller_name, false);
             }
         }else{
-            redirect_page($controller_name, false);
+           redirect_page($controller_name, false);
         }
-        
     }else{
         redirect_page($controller_name, true);
     }
@@ -49,7 +58,7 @@
             if($controller_name == "GenesisWeb"){
                 //header('location: index.php');
             }else{
-               //header('location: index.php');
+                header('location: ../../index.php');
             }
            
         }

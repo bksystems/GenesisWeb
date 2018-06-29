@@ -90,8 +90,9 @@
 					},
 					success: function(response){
         				if(response.result == true){
+							//alert('test');
         					window.location.replace("../../index.php")
-							$('#error_validation').text('credenciales correctas');
+							//$('#error_validation').text('credenciales correctas');
         				}else{
 							$("#login-validation").css("display", "none");
 							$('#error_validation').text('credenciales incorrectas');

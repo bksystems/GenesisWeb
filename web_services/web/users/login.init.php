@@ -83,7 +83,6 @@
 								$json_result['message'] = 'success';
 
 								session_start();
-								//$_SESSION['user_id'] = $array_data_result['id'];
 								$_SESSION['session'] = $jsonSession;
 								$_SESSION['employee'] = $employee_array;
 								$_SESSION['permissions'] = $user_permission;
