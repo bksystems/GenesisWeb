@@ -5,7 +5,7 @@
 <html>
 <head>
    <?php
-   	$title_page = "Roles"; 
+   	$title_page = "Permisos"; 
    	include('..//template_plugins//pages_template_head.php');
    ?>
 </head>
@@ -20,13 +20,13 @@
 			<div class="col-md-2">
 				<div class="card">
 					<div class="card-header">
-						<h6>Roles del sistema</h6>
+						<h6>Acciones</h6>
 					</div>
 					<div class="card-body">
 						<div class="list-group">
-							<a href="add.php" class="list-group-item list-group-item-action">Crear Rol</a>
-							<a href="../permissions/index.php" class="list-group-item list-group-item-action">Ir a permisos</a>
-							<a href="../rols_permissions/index.php" class="list-group-item list-group-item-action">Rol - permiso</a>
+							<a href="add.php" class="list-group-item list-group-item-action">Crear nuevo permiso</a>
+							<a href="../rols/index.php" class="list-group-item list-group-item-action">Crear nuevo rol</a>
+							<a href="../rols_permissions/index.php" class="list-group-item list-group-item-action">Asignar permiso a rol</a>
 						</div>
 					</div>
 				</div>
@@ -34,16 +34,16 @@
 			<div class="col-md-10">
 				<div class="card">
 						<div class="card-header">
-							<h6>Listado de roles</h6>
+							<h6>Listado de permisos</h6>
 						</div>
 						<div class="card-body">
-							<table id="table_rols" class="table table-hover table-striped table-bordered" style="font-size:12px;">
+							<table id="table_permissions" class="table table-hover table-striped table-bordered" style="font-size:12px;">
 								<thead>
 									<tr>
-										<th>Rol</th>
+										<th>Permiso</th>
 										<th>Descriptción</th>
 										<th>Estatus</th>
-										<th>Permisos</th>
+										<th>Creación</th>
 									</tr>
 								</thead>
 							</table>
@@ -63,7 +63,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#table_rols').DataTable({
+		$('#table_permissions').DataTable({
 			'language':{
 				'search':'Buscar _INPUT_ en la tabla',
 				'lengthMenu': 'Mostrar _MENU_ rengistros por pagina',
@@ -77,13 +77,13 @@
 				}
 			},
 			ajax: {
-				url: '../../web_services/web/rols/web_json_get_rols.php',
+				url: '../../web_services/web/permissions/web_json_get_permission.php',
 				dataSrc: 'data'
     		},
     		columns: [
-				{data: 'rol'},
+				{data: 'controller'},
 				{data: 'description'},
-				{data: 'status'},
+				{data: 'enabled'},
 				{data: 'created'}
 			]
 		});

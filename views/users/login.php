@@ -5,7 +5,7 @@
    	        $title_page = "Login"; 
    	        include('..//template_plugins//pages_template_head.php');
         ?>
-        <script type="text/javascript" src="../../content/js/hash_md5.min.js"></script>
+        <script type="text/javascript" src="../../content/js/encryption/encription_sha256.js"></script>
         <title><?php echo $title_page;?></title>
     </head>
     <body>
@@ -66,8 +66,7 @@
 		$('#loginbtn').click(function(){
 			$result = true;
 			$username = $("#user_number").val();
-			$password = $("#user_password").val();
-		    //$password = md5($password);
+			$password = SHA256($("#user_password").val());
 		        
 			if($username == ""){
 				$('#error_nomina').text('Este campo es obligatorio');

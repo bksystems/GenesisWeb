@@ -13,7 +13,7 @@
 		global $connect;
 		$json_result = array();
 		
-		$query_user_validate = "SELECT * FROM sys_tb_users WHERE user_name = '$user_username' AND user_password = '$user_password' ";
+		$query_user_validate = "SELECT * FROM sys_tb_users WHERE user_name = '$user_username' AND user_password LIKE '$user_password' ";
 		$result_user_validate = mysqli_query($connect, $query_user_validate);
 		if(mysqli_num_rows($result_user_validate) > 0){
 			$array_data_result = array();
