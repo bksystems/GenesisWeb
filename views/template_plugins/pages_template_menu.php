@@ -6,9 +6,9 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <ul class="navbar-nav mr-auto">
-      <a class="nav-item nav-link" href="../../index.php">Inicio <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="../indicators/index.php">Dashboard <span class="sr-only"></span></a>
-      <a class="nav-item nav-link" href="../maps/index.php">Mapa <span class="sr-only"></span></a>
+      <a class="nav-item nav-link" href="../../index.php"><span class="glyphicon glyphicon-home"></span> Inicio<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="../indicators/index.php"><span class="glyphicon glyphicon-dashboard"></span> Dashboard<span class="sr-only"></span></a>
+      <a class="nav-item nav-link" href="../maps/index.php"> <span class="glyphicon glyphicon-screenshot"></span> Mapa<span class="sr-only"></span></a>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Seguimiento Génesis
@@ -57,10 +57,10 @@
     <ul class="navbar-nav">
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <?php echo $_SESSION['employee']['names'] . ' ' . $_SESSION['employee']['first_lastname'] . ' ' . $_SESSION['employee']['second_lastname'] ?>
+            <span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['employee']['names'] . ' ' . $_SESSION['employee']['first_lastname'] . ' ' . $_SESSION['employee']['second_lastname'] ?>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="../../web_services/web/users/logout_end.php">Log Out</a>
+                <a class="dropdown-item" href="../../web_services/web/users/logout_end.php"><span class="glyphicon glyphicon-log-out"></span> Log Out</a>
                 <a class="dropdown-item" href="#">Another action</a>
             </div>
         </li>

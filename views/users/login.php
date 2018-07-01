@@ -23,7 +23,7 @@
                                 <label for="user_password">Password</label>
                                 <input type="password" id="user_password" class="form-control" placeholder="Password">
                             </div>
-                            <button type="button" id="loginbtn" class="btn btn-primary">Ingresar</button>
+                            <button type="button" id="loginbtn" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> Ingresar</button>
                         </form>
                         <div id="error_validation" class="login-validation-error"></div>
                     </div>
