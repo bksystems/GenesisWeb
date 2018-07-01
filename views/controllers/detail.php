@@ -79,4 +79,48 @@
         return $without_extension;
     }
 
+    function permission_access($controller_name, $action_name){
+        $result_access_view = false;
+        if(isset($_SESSION['session']) && isset($_SESSION['employee']) && $_SESSION['state'] == 1){   
+            $index_array = array_search($controller_name, array_column($_SESSION['permissions'], 'controller'));    
+            if($index_array != null){
+                $type_action_page = null;
+                switch ($action_name){
+                    case 'index':
+                        $type_action_page = 'is_index';
+                        break;
+                    case 'add':
+                        $type_action_page = 'is_add';
+                        break;
+                    case 'edit':
+                        $type_action_page = 'is_edit';
+                        break;
+                    case 'delete':
+                        $type_action_page = 'is_delete';
+                        break;
+                    case 'detail':
+                        $type_action_page = 'is_details';
+                        break;
+                }
+                if($type_action_page != null){
+    
+                    $is_enabled = null;
+                    $is_enabled = $_SESSION['permissions'][$index_array][$type_action_page];
+                    if($is_enabled != null){
+                        $result_access_view = true;
+                    }else{
+                        $result_access_view = false;
+                    }
+                }else{
+                    $result_access_view = false;
+                }
+            }else{
+                $result_access_view = false;
+            }
+        }else{
+            $result_access_view = false;
+        }
+        return $result_access_view;
+    }
+
 ?>

@@ -11,19 +11,19 @@
       <a class="nav-item nav-link" href="../maps/index.php"> <span class="glyphicon glyphicon-screenshot"></span> Mapa<span class="sr-only"></span></a>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Seguimiento Génesis
+        <span class="glyphicon glyphicon-check"></span> Seguimiento
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="../activity_teams/index.php">Actividades en campo</a>
-          <a class="dropdown-item" href="../shelter_letters/index.php">Cartas resguardo</a>
+          <a class="dropdown-item" href="../activity_teams/index.php"><span class="glyphicon glyphicon-book"></span> Actividades en campo</a>
+          <a class="dropdown-item" href="../shelter_letters/index.php"><span class="glyphicon glyphicon-file"></span> Cartas resguardo</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Matríz de operaciones</a>
-          <a class="dropdown-item" href="#">Matríz de ventas</a>
+          <a class="dropdown-item" href="#"><span class="glyphicon glyphicon-tag"></span> Matríz de operaciones</a>
+          <a class="dropdown-item" href="#"><span class="glyphicon glyphicon-tags"></span> Matríz de ventas</a>
         </div>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Mantenimiento
+        <span class="glyphicon glyphicon-cog"></span> Mantenimiento
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <h6 class="dropdown-header">Catalogos de sistema</h6>
@@ -37,9 +37,10 @@
             <a class="dropdown-item" href="#">Bitacora</a>
         </div>
       </li>
+      <?php if(permission_access('controllers', 'edit') == true) { ?>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Administración
+        <span class="glyphicon glyphicon-wrench"></span> Administración
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <h6 class="dropdown-header">Acceso</h6>
@@ -53,6 +54,7 @@
             <a class="dropdown-item" href="#">Logs</a>
         </div>
       </li>
+      <?php } ?>
     </ul>
     <ul class="navbar-nav">
         <li class="nav-item dropdown">
